@@ -15,15 +15,15 @@ st.set_page_config(
 # Custom Theme: Animated Microchip / PCB Video Background + Frosted Silicon UI
 # ---------------------------------------------------------------------------
 FEATURE_META = {
-    "ram": ("RAM", "MB"),
-    "int_memory": ("Internal Storage", "GB"),
-    "battery_power": ("Battery Capacity", "mAh"),
-    "px_width": ("Resolution Width", "px"),
-    "px_height": ("Resolution Height", "px"),
-    "sc_w": ("Screen Width", "cm"),
-    "sc_h": ("Screen Height", "cm"),
-    "pc": ("Primary Camera", "MP"),
-    "mobile_wt": ("Weight", "g"),
+    "ram": ("RAM (MB)", "MB"),
+    "int_memory": ("Internal Storage (GB)", "GB"),
+    "battery_power": ("Battery Capacity (mAh)", "mAh"),
+    "px_width": ("Resolution Width (px)", "px"),
+    "px_height": ("Resolution Height (px)", "px"),
+    "sc_w": ("Screen Width (cm)", "cm"),
+    "sc_h": ("Screen Height (cm)", "cm"),
+    "pc": ("Primary Camera (MP)", "MP"),
+    "mobile_wt": ("Weight (g)", "g"),
     "touch_screen": ("Touch Screen", "0 = No, 1 = Yes"),
 }
 
