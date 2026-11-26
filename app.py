@@ -11,43 +11,58 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------------------------
-# Custom Theme: Grounded Smartphone Hardware & Editorial Spec-Sheet Look
+# Custom Theme: Deep Teal-Blue PCB / Mobile SoC Circuit Board (Reference UI)
 # ---------------------------------------------------------------------------
-PHONE_PATTERN_SVG = (
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E"
-    "%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.055' stroke-width='1.5'%3E"
-    "%3Cg transform='translate(28 24) rotate(-14)'%3E"
-    "%3Crect x='0' y='0' width='44' height='82' rx='8'/%3E"
-    "%3Crect x='14' y='5' width='16' height='3' rx='1.5'/%3E"
-    "%3Crect x='5' y='12' width='34' height='58' rx='3'/%3E"
-    "%3Ccircle cx='22' cy='75' r='2.5'/%3E"
+PCB_PATTERN_SVG = (
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360' viewBox='0 0 360 360'%3E"
+    "%3Cdefs%3E"
+    "%3ClinearGradient id='traceGlow' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E"
+    "%3Cstop offset='0%25' stop-color='%237dd3fc' stop-opacity='0.34'/%3E"
+    "%3Cstop offset='50%25' stop-color='%2338bdf8' stop-opacity='0.14'/%3E"
+    "%3Cstop offset='100%25' stop-color='%23bae6fd' stop-opacity='0.30'/%3E"
+    "%3C/linearGradient%3E"
+    "%3C/defs%3E"
+    # Radiating PCB bus traces (45-deg & orthogonal)
+    "%3Cg fill='none' stroke='url(%23traceGlow)' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'%3E"
+    # Top-left bus into center SoC
+    "%3Cpath d='M0 36 H72 L116 80 V132 M0 46 H66 L108 88 V132 M0 56 H60 L100 96 V132 M18 0 V30 L84 96 V132'/%3E"
+    # Top-right bus into center SoC
+    "%3Cpath d='M360 40 H282 L238 84 V132 M360 50 H288 L246 92 V132 M360 60 H294 L254 100 V132 M310 0 V32 L262 80 V132'/%3E"
+    # Bottom-left bus out of center SoC
+    "%3Cpath d='M132 228 V264 L78 318 H0 M140 228 V270 L84 326 H0 M148 228 V276 L90 334 H0 M124 228 V256 L40 340 V360'/%3E"
+    # Bottom-right bus out of center SoC
+    "%3Cpath d='M228 228 V264 L282 318 H360 M220 228 V270 L276 326 H360 M212 228 V276 L270 334 H360 M236 228 V256 L320 340 V360'/%3E"
+    # Horizontal left/right buses
+    "%3Cpath d='M0 162 H132 M0 172 H132 M0 182 H132 M0 192 H132'/%3E"
+    "%3Cpath d='M228 162 H360 M228 172 H360 M228 182 H360 M228 192 H360'/%3E"
+    # Vertical top/bottom buses
+    "%3Cpath d='M162 0 V132 M172 0 V132 M182 0 V132 M192 0 V132'/%3E"
+    "%3Cpath d='M162 228 V360 M172 228 V360 M182 228 V360 M192 228 V360'/%3E"
+    # Serpentine delay lines
+    "%3Cpath d='M26 244 h16 v8 h-16 v8 h16 v8 h-16 M294 114 h18 v8 h-18 v8 h18 v8 h-18'/%3E"
     "%3C/g%3E"
-    "%3Cg transform='translate(168 30) rotate(10)'%3E"
-    "%3Crect x='0' y='0' width='42' height='42' rx='10'/%3E"
-    "%3Ccircle cx='13' cy='13' r='5.5'/%3E"
-    "%3Ccircle cx='29' cy='13' r='5.5'/%3E"
-    "%3Ccircle cx='13' cy='29' r='5.5'/%3E"
-    "%3Ccircle cx='29' cy='29' r='2.5'/%3E"
+    # Central SoC / Mobile Processor Package
+    "%3Cg transform='translate(132 132)'%3E"
+    "%3Crect x='0' y='0' width='96' height='96' rx='8' fill='%2303101a' fill-opacity='0.78' stroke='%237dd3fc' stroke-opacity='0.38' stroke-width='1.6'/%3E"
+    "%3Crect x='14' y='14' width='68' height='68' rx='4' fill='%23061b2b' fill-opacity='0.9' stroke='%2338bdf8' stroke-opacity='0.32' stroke-width='1.2'/%3E"
+    "%3Crect x='26' y='26' width='44' height='44' rx='2' fill='none' stroke='%23bae6fd' stroke-opacity='0.28' stroke-dasharray='3 3'/%3E"
+    "%3Ctext x='48' y='52' text-anchor='middle' fill='%237dd3fc' fill-opacity='0.35' font-family='monospace' font-size='11' font-weight='bold'%3ESoC%3C/text%3E"
     "%3C/g%3E"
-    "%3Cg transform='translate(106 112)'%3E"
-    "%3Crect x='0' y='4' width='34' height='18' rx='3'/%3E"
-    "%3Crect x='34' y='9' width='3' height='8' rx='1'/%3E"
-    "%3Crect x='4' y='8' width='10' height='10' rx='1'/%3E"
-    "%3Crect x='17' y='8' width='10' height='10' rx='1'/%3E"
+    # Corner SMD IC Chips (RAM, SIM, BATT) & Via Pads
+    "%3Cg fill='%23041522' fill-opacity='0.75' stroke='%237dd3fc' stroke-opacity='0.28' stroke-width='1.1'%3E"
+    "%3Crect x='34' y='104' width='42' height='28' rx='3'/%3E"
+    "%3Crect x='284' y='224' width='44' height='30' rx='3'/%3E"
+    "%3Crect x='272' y='22' width='36' height='22' rx='3'/%3E"
+    "%3Ccircle cx='88' cy='252' r='6'/%3E"
+    "%3Ccircle cx='104' cy='268' r='4'/%3E"
+    "%3Ccircle cx='262' cy='102' r='5'/%3E"
     "%3C/g%3E"
-    "%3Cg transform='translate(36 164) rotate(12)'%3E"
-    "%3Crect x='0' y='0' width='50' height='86' rx='9'/%3E"
-    "%3Crect x='6' y='8' width='38' height='68' rx='4'/%3E"
-    "%3Crect x='18' y='4' width='14' height='2.5' rx='1'/%3E"
+    "%3Cg fill='%237dd3fc' fill-opacity='0.26' font-family='monospace' font-size='8' font-weight='bold'%3E"
+    "%3Ctext x='44' y='121'%3ERAM%3C/text%3E"
+    "%3Ctext x='294' y='242'%3EBATT%3C/text%3E"
+    "%3Ctext x='281' y='36'%3ESIM%3C/text%3E"
     "%3C/g%3E"
-    "%3Cg transform='translate(172 148) rotate(-10)'%3E"
-    "%3Crect x='0' y='0' width='46' height='86' rx='8'/%3E"
-    "%3Crect x='6' y='6' width='18' height='24' rx='4'/%3E"
-    "%3Ccircle cx='15' cy='13' r='3.5'/%3E"
-    "%3Ccircle cx='15' cy='23' r='3.5'/%3E"
-    "%3C/g%3E"
-    "%3Cpath d='M126 42 a12 12 0 0 1 16 0 M122 36 a18 18 0 0 1 24 0'/%3E"
-    "%3C/g%3E%3C/svg%3E"
+    "%3C/svg%3E"
 )
 
 st.markdown(
@@ -56,23 +71,26 @@ st.markdown(
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
     :root {{
-        --bg-base: #121417;
-        --bg-surface: #1a1d23;
-        --bg-surface-2: #22262e;
-        --border-line: #2e333d;
-        --text-main: #f3f4f6;
-        --text-sub: #9ca3af;
-        --brand: #2563eb;
-        --brand-hover: #1d4ed8;
+        --bg-base: #041826;
+        --bg-surface: rgba(6, 28, 44, 0.88);
+        --bg-surface-2: rgba(10, 40, 62, 0.90);
+        --border-line: rgba(56, 189, 248, 0.26);
+        --text-main: #f0f9ff;
+        --text-sub: #93c5fd;
+        --brand: #0284c7;
+        --brand-hover: #0ea5e9;
     }}
 
     .stApp {{
         background-color: var(--bg-base);
         background-image:
-            linear-gradient(180deg, rgba(18, 20, 23, 0.72) 0%, rgba(18, 20, 23, 0.88) 100%),
-            url("{PHONE_PATTERN_SVG}");
-        background-repeat: repeat;
-        background-size: auto, 260px 260px;
+            radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.18) 0%, transparent 48%),
+            radial-gradient(circle at 15% 20%, rgba(14, 165, 233, 0.14) 0%, transparent 40%),
+            radial-gradient(circle at 85% 80%, rgba(56, 189, 248, 0.12) 0%, transparent 42%),
+            linear-gradient(180deg, rgba(4, 24, 38, 0.62) 0%, rgba(3, 16, 27, 0.84) 100%),
+            url("{PCB_PATTERN_SVG}");
+        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+        background-size: auto, auto, auto, auto, 360px 360px;
         color: var(--text-main);
         font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }}
@@ -149,10 +167,12 @@ st.markdown(
     /* Input Panel Card */
     div[data-testid="stVerticalBlockBorderWrapper"] {{
         background: var(--bg-surface);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border: 1px solid var(--border-line) !important;
         border-radius: 14px !important;
         padding: 1.25rem 1.4rem !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 12px 32px rgba(2, 12, 22, 0.55), 0 0 24px rgba(14, 165, 233, 0.08);
     }}
 
     .group-title {{
@@ -213,18 +233,18 @@ st.markdown(
 
     /* Realistic Smartphone Mockup Preview */
     .phone-chassis {{
-        background: #1d2026;
-        border: 3px solid #343944;
+        background: linear-gradient(165deg, #0b2538 0%, #05131f 100%);
+        border: 2.5px solid rgba(56, 189, 248, 0.35);
         border-radius: 34px;
         padding: 14px;
-        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.48);
+        box-shadow: 0 20px 44px rgba(2, 12, 22, 0.65), 0 0 28px rgba(14, 165, 233, 0.14);
         max-width: 390px;
         margin: 0 auto;
     }}
 
     .phone-screen {{
-        background: #121417;
-        border: 1px solid #2a2f3a;
+        background: #041421;
+        border: 1px solid rgba(56, 189, 248, 0.22);
         border-radius: 24px;
         padding: 1rem 1.1rem 1.2rem 1.1rem;
     }}
@@ -350,6 +370,77 @@ st.markdown(
         border-radius: 999px;
     }}
 
+    .hw-strip {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.7rem;
+    }}
+
+    .hw-badge {{
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.28rem 0.65rem;
+        border-radius: 8px;
+        background: var(--bg-surface-2);
+        border: 1px solid var(--border-line);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.74rem;
+        color: #d1d5db;
+    }}
+
+    .hw-tiles {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.55rem;
+        margin-bottom: 0.75rem;
+    }}
+
+    .hw-tile {{
+        background: #181c24;
+        border: 1px solid #2b313d;
+        border-radius: 10px;
+        padding: 0.55rem 0.7rem;
+    }}
+
+    .hw-tile-label {{
+        font-size: 0.66rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #9ca3af;
+        margin-bottom: 0.15rem;
+    }}
+
+    .hw-tile-val {{
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: #f3f4f6;
+    }}
+
+    .batt-pill {{
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }}
+
+    .batt-icon {{
+        width: 24px;
+        height: 11px;
+        border: 1px solid #6b7280;
+        border-radius: 2.5px;
+        padding: 1.5px;
+        display: inline-flex;
+        align-items: center;
+    }}
+
+    .batt-fill {{
+        height: 100%;
+        background: #10b981;
+        border-radius: 1px;
+    }}
+
     @media (max-width: 768px) {{
         .page-header {{
             flex-direction: column;
@@ -399,15 +490,33 @@ st.markdown(
     <div class="page-header">
         <div class="header-left">
             <div class="phone-mark">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e5e7eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="6" y="2" width="12" height="20" rx="2.5"></rect>
                     <line x1="10" y1="5" x2="14" y2="5"></line>
-                    <circle cx="12" cy="18.5" r="0.8" fill="#e5e7eb"></circle>
+                    <circle cx="12" cy="18.5" r="0.8" fill="#60a5fa"></circle>
                 </svg>
             </div>
             <div>
                 <h1 class="page-title">Mobile Phone Price Range Predictor</h1>
                 <p class="page-subtitle">Enter the mobile specifications to predict its price range.</p>
+                <div class="hw-strip">
+                    <span class="hw-badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>
+                        RAM &amp; Storage
+                    </span>
+                    <span class="hw-badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="7" width="18" height="10" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/><path d="M11 9l-2 3h3l-1 3"/></svg>
+                        Battery Power
+                    </span>
+                    <span class="hw-badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M6 2h8l4 4v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><rect x="8" y="11" width="8" height="7" rx="1"/></svg>
+                        Dual SIM · 5G
+                    </span>
+                    <span class="hw-badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        Camera &amp; Display
+                    </span>
+                </div>
             </div>
         </div>
         <div class="header-meta">4 Price Tiers · Hardware Spec Estimator</div>
@@ -515,6 +624,9 @@ TIER_COLORS = {
 
 with col_preview:
     touch_text = "Yes" if ordered_input_data.get("touch_screen", 0) >= 0.5 else "No"
+    batt_val = ordered_input_data.get("battery_power", 0)
+    batt_pct = max(8, min(100, int(batt_val / 2000.0 * 100)))
+    ram_val = ordered_input_data.get("ram", 0)
 
     if submitted:
         input_df = pd.DataFrame([ordered_input_data])
@@ -561,15 +673,28 @@ with col_preview:
             <div class="phone-chassis">
                 <div class="phone-screen">
                     <div class="phone-status-bar">
-                        <span>5G</span>
+                        <span>SIM1·SIM2 5G</span>
                         <div class="dynamic-island"></div>
-                        <span>{ordered_input_data.get('battery_power', 0):.0f}mAh</span>
+                        <span class="batt-pill">
+                            <span class="batt-icon"><span class="batt-fill" style="width:{batt_pct}%;"></span></span>
+                            {batt_val:.0f}mAh
+                        </span>
                     </div>
                     <div class="price-readout" style="border-color: {accent_color};">
                         <div class="price-label">Predicted Price Range</div>
                         <p class="price-value" style="color: {accent_color};">{price_labels[prediction]}</p>
                         {confidence_subline}
                         <div class="tier-steps">{steps_html}</div>
+                    </div>
+                    <div class="hw-tiles">
+                        <div class="hw-tile">
+                            <div class="hw-tile-label">RAM Module</div>
+                            <div class="hw-tile-val" style="color:#fbbf24;">{ram_val:.0f} MB</div>
+                        </div>
+                        <div class="hw-tile">
+                            <div class="hw-tile-label">Battery Power</div>
+                            <div class="hw-tile-val" style="color:#34d399;">{batt_val:.0f} mAh</div>
+                        </div>
                     </div>
                     <table class="spec-table">
                         <tr><td class="spec-key">RAM</td><td class="spec-val">{ordered_input_data.get('ram', 0):.0f} MB</td></tr>
@@ -674,8 +799,8 @@ with col_preview:
 
             confidence_chart = (
                 (bars + labels)
-                .properties(height=270, background="#1a1d23")
-                .configure_view(stroke="#2e333d", fill="#1a1d23")
+                .properties(height=270, background="#061c2c")
+                .configure_view(stroke="#164e63", fill="#061c2c")
             )
             st.altair_chart(confidence_chart, use_container_width=True)
 
@@ -690,9 +815,12 @@ with col_preview:
             <div class="phone-chassis">
                 <div class="phone-screen">
                     <div class="phone-status-bar">
-                        <span>5G</span>
+                        <span>SIM1·SIM2 5G</span>
                         <div class="dynamic-island"></div>
-                        <span>{ordered_input_data.get('battery_power', 0):.0f}mAh</span>
+                        <span class="batt-pill">
+                            <span class="batt-icon"><span class="batt-fill" style="width:{batt_pct}%;"></span></span>
+                            {batt_val:.0f}mAh
+                        </span>
                     </div>
                     <div class="price-readout">
                         <div class="price-label">Estimated Tier</div>
@@ -702,6 +830,16 @@ with col_preview:
                             <div class="tier-step"></div>
                             <div class="tier-step"></div>
                             <div class="tier-step"></div>
+                        </div>
+                    </div>
+                    <div class="hw-tiles">
+                        <div class="hw-tile">
+                            <div class="hw-tile-label">RAM Module</div>
+                            <div class="hw-tile-val" style="color:#fbbf24;">{ram_val:.0f} MB</div>
+                        </div>
+                        <div class="hw-tile">
+                            <div class="hw-tile-label">Battery Power</div>
+                            <div class="hw-tile-val" style="color:#34d399;">{batt_val:.0f} mAh</div>
                         </div>
                     </div>
                     <table class="spec-table">
